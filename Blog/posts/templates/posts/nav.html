@@ -1,0 +1,32 @@
+<div class='col-sm-6 col-sm-offset-3'>
+
+<p></p>
+
+<!-- .navbar-fixed-top, or .navbar-fixed-bottom can be added to keep the nav bar fixed on the screen -->
+<div class="container-fluid">
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-left">
+      
+         <li><h3>POSTs</h3><li>
+      </ul>
+      <!-- navbar-left will move the search to the left -->
+      <p></p>
+      <form class="navbar-form navbar-right" role="search" method='GET' action=''>
+        <div class="form-group">
+          <input type="text" name ='q' class="form-control" placeholder="Search posts" value='{{request.GET.q}}'/>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+        <a href="create" role="button" class="btn btn-default" >Create</a>
+      </form>
+    </div><!-- /.navbar-collapse -->
+</div>
+</div>
+
+
+
+
+
+
+
