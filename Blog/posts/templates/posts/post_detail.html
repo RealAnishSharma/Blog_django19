@@ -1,17 +1,73 @@
 {% extends "posts/base.html" %}
 
+
+
 {% block head_title %}
 {{instance.title}}|{{block.super}}
 {% endblock head_title%}
 
 
-{%block content%}
+{% block content %}
 <div class='col-sm-6 col-sm-offset-3'>
-{%if instance.image%}
-<img src='{{instance.image.url}}' class='img-responsive'/>
-{%endif%}
-<h1>{{title}} <small>{%if instance.draft%}<span style='color:red;'>Draft</span>{%endif%}{{instance.publish}}</small>
-<a href="edit" class="btn btn-primary btn-sm" style="float:right"> Edit </a></h1>
+
+
+
+{% if instance.image %}
+<img id="imageo" style="display:'block'" src='{{instance.image.url}}' class='img-responsive'/>
+{% endif %}
+
+
+
+
+
+<div class="jumotron" style="display:none" id="vid">
+{% if instance.urlt %}
+<iframe width="540" height="305"
+src='{{instance.urlt}}'>
+</iframe>
+{% elif instance.file %}
+<video width="540" height="360" controls>
+  <source src='{{instance.file.url}}' type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+{% endif %}
+</div>
+
+
+
+
+
+
+
+<h1>{{title}} <small>{%if instance.draft%}<span style='color:red;'>Draft</span>{%endif%}{{instance.publish}}</small></h1>
+
+<div class="btn-group " role="group" aria-label="..." style="float:right">
+  <a href="edit" type="button" class="btn btn-sm" > Edit </a>
+  <button type="button" id="pico1" class="btn btn-sm"  onclick="clickme(this)" style="display:block">Video</button>
+  <button type="button" id="pico2" class="btn btn-sm"  onclick="clickme(this)" style="display:none">Image</button>
+</div>
+
+
+
+
+<script>
+function clickme(event){
+if(document.getElementById('vid').style.display === 'none'){
+document.getElementById('vid').style.display='block';
+document.getElementById('imageo').style.display='none';
+document.getElementById('pico2').style.display='block';
+document.getElementById('pico1').style.display='none';
+}
+else{
+document.getElementById('vid').style.display='none';
+document.getElementById('imageo').style.display='block';
+document.getElementById('pico1').style.display='block'
+document.getElementById('pico2').style.display='none';
+}}
+</script>
+
+
+
 {%if instance.user.get_full_name%}
 <p>Author: {{instance.user.get_full_name}}</p>
 {%endif%}
@@ -23,7 +79,15 @@
 <div class='row'>
 <div class='col-sm-12 content-markdown'>
 
+
+
+
+
+
 {{instance.content|linebreaks}}<hr/></br>
+
+
+
 <div class="fb-comments" data-href="{{request.build_absolute_uri}}" data-numposts="5"></div>
 </div>
 </div>
